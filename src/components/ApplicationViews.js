@@ -1,10 +1,14 @@
 import React from "react"
 import { Route } from "react-router-dom"
 import { Home } from "./Home"
-import { AnimalCard } from "./animal/AnimalCard"
-import { CustomerCard } from "./customers/CustomerCard"
-import { EmployeeCard } from "./employee/EmployeeCard"
-import { LocationCard } from "./location/LocationCard"
+import { AnimalList } from "./animal/AnimalList"
+import { AnimalProvider } from "./animal/AnimalProvider"
+import { CustomerList } from "./customers/CustomerList"
+import { CustomerProvider } from "./customers/CustomerProvider"
+import { EmployeeList } from "./employee/EmployeeList"
+import { EmployeeProvider } from "./employee/EmployeeProvider"
+import { LocationProvider } from "./location/LocationProvider"
+import { LocationList } from "./location/LocationList"
 
 export const ApplicationViews = () => {
     return (
@@ -15,21 +19,29 @@ export const ApplicationViews = () => {
             </Route>
 
             {/* Render the animal list when http://localhost:3000/animals */}
-            <Route path="/animals">
-                <AnimalCard />
-            </Route>
+            <AnimalProvider>
+                <Route path="/animals">
+                    <AnimalList />
+                </Route>
+            </AnimalProvider>
 
-            <Route path="/customers">
-                <CustomerCard/>
-            </Route>
+            <CustomerProvider>
+                <Route path="/customers">
+                    <CustomerList/>
+                </Route>
+            </CustomerProvider>
 
-            <Route path="/employees">
-                <EmployeeCard/>
-            </Route>
+            <EmployeeProvider>
+                <Route path="/employees">
+                    <EmployeeList/>
+                </Route>
+            </EmployeeProvider>
 
-            <Route path="/locations">
-                <LocationCard/>
-            </Route>
+            <LocationProvider>
+                <Route path="/locations">
+                    <LocationList/>
+                </Route>
+            </LocationProvider>
         </>
     )
 }
