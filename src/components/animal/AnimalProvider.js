@@ -20,6 +20,23 @@ const getAnimals = () => {
     .then(setAnimals)
 }
 
+const releaseAnimal = animalId => {
+    return fetch(`http://localhost:8088/animals/${animalId}`, {
+        method: "DELETE"
+    })
+    .then(getAnimals)
+}
+
+const updateAnimal = animal => {
+    return fetch(`http://localhost:8088/animals/${animal.id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(animal)
+    })
+        .then(getAnimals)
+}
 
     const addAnimal = animalObj => {
         return fetch("http://localhost:8088/animals", {
@@ -40,7 +57,7 @@ const getAnimals = () => {
     */
     return (
         <AnimalContext.Provider value={{
-            animals, getAnimals, addAnimal, getAnimalById
+            animals, getAnimals, addAnimal, getAnimalById, releaseAnimal, updateAnimal
         }}>
             {props.children}
         </AnimalContext.Provider>
